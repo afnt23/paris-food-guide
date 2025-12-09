@@ -41,7 +41,7 @@ export default function HomePage() {
               href="/restaurants"
               className="group inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-neutral-950 shadow-lg shadow-black/40 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl"
             >
-              See the spots
+              <span className="text-black">Starving?</span>
               <span className="h-px w-10 bg-neutral-900 transition-all group-hover:w-14" />
             </Link>
             <Link
