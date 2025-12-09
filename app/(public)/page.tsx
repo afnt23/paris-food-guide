@@ -16,18 +16,17 @@ export default function HomePage() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70" />
 
-      <div className="relative flex min-h-screen flex-col justify-between px-6 py-10 sm:px-10 md:px-16">
+      <div className="relative flex min-h-screen flex-col justify-between px-6 pt-4 pb-14 sm:px-10 sm:pt-6 sm:pb-16 md:px-16">
         <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
           <div className="flex items-center gap-3">
             <Image
               src="/oobc-logo.png"
               alt="Oui Oui Baguette Croissant logo"
-              width={40}
-              height={40}
-              className="h-9 w-9 object-contain"
+              width={112}
+              height={112}
+              className="h-28 w-28 object-contain"
               priority
             />
-            <span>Oui Oui Baguette Croissant</span>
           </div>
           <span className="text-neutral-400">Only the good rooms</span>
         </header>
