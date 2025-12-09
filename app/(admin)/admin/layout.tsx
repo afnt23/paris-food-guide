@@ -14,7 +14,7 @@ export default function AdminLayout({
               Admin
             </p>
             <h1 className="text-2xl font-semibold leading-tight">
-              Paris Food Guide
+              Oui Oui Baguette Croissant
             </h1>
           </div>
           <Link

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -17,7 +18,17 @@ export default function HomePage() {
 
       <div className="relative flex min-h-screen flex-col justify-between px-6 py-10 sm:px-10 md:px-16">
         <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
-          <span>Paris Food Guide</span>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/oobc-logo.png"
+              alt="Oui Oui Baguette Croissant logo"
+              width={40}
+              height={40}
+              className="h-9 w-9 object-contain"
+              priority
+            />
+            <span>Oui Oui Baguette Croissant</span>
+          </div>
           <span className="text-neutral-400">Only the good rooms</span>
         </header>
 

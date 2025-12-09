@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Paris Food Guide",
-    template: "%s | Paris Food Guide",
+    default: "Oui Oui Baguette Croissant",
+    template: "%s | OOBC",
   },
   description:
-    "Minimal, cinematic guide to the places we actually love eating and drinking in Paris.",
+    "Oui Oui Baguette Croissant (OOBC): a minimal, cinematic guide to the rooms we actually love eating and drinking in Paris.",
 };
 
 export default function RootLayout({

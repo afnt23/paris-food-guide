@@ -9,11 +9,11 @@ export default function AdminHomePage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <h2 className="text-3xl font-semibold tracking-tight">
-          Admin – Paris Food Guide
+          Admin – Oui Oui Baguette Croissant
         </h2>
         <p className="max-w-2xl text-neutral-600">
-          Lightweight control room for the guide. Drafts stay hidden on the
-          public side; everything shows up here.
+          Lightweight control room for OOBC. Drafts stay hidden on the public
+          side; everything shows up here.
         </p>
       </div>
 
