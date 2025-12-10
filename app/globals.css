@@ -4,6 +4,7 @@ html,
 body {
   background: #000;
   color: #0b0b0b;
+  height: 100%;
   margin: 0;
   min-height: 100%;
 }

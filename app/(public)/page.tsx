@@ -62,7 +62,7 @@ function HeroLogo() {
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen min-h-[100svh] overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen min-h-[100svh] min-h-[100dvh] overflow-hidden bg-black text-white">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -74,11 +74,10 @@ export default function HomePage() {
       </video>
 
       <div className="relative flex min-h-[100dvh] flex-col justify-between px-6 pb-[max(env(safe-area-inset-bottom),3.5rem)] pt-[max(env(safe-area-inset-top),1rem)] sm:px-10 sm:pb-[max(env(safe-area-inset-bottom),4rem)] sm:pt-[max(env(safe-area-inset-top),1.5rem)] md:px-16">
-        <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
+        <header className="flex items-center justify-start text-[11px] uppercase tracking-[0.28em] text-neutral-300">
           <div className="flex items-center gap-3">
             <HeroLogo />
           </div>
-          <span className="text-neutral-400">Only the good rooms</span>
         </header>
 
         <div className="flex flex-col gap-6 pb-8 sm:gap-8 sm:pb-14">
@@ -93,25 +92,6 @@ export default function HomePage() {
             >
               <span className="text-black">Starving?</span>
               <span className="h-px w-10 bg-neutral-900 transition-all group-hover:w-14" />
-            </Link>
-            <Link
-              href="/admin"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-3 text-neutral-50 transition duration-300 hover:border-white hover:text-white"
-            >
-              Admin
-              <svg
-                aria-hidden
-                viewBox="0 0 16 16"
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M4 12 12 4" />
-                <path d="M6 4h6v6" />
-              </svg>
             </Link>
           </div>
         </div>

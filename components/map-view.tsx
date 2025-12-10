@@ -28,7 +28,10 @@ function categoryBucket(category: string): keyof typeof palette {
   return "food";
 }
 
-const mapStyles: google.maps.MapTypeStyle[] = [];
+const mapStyles: google.maps.MapTypeStyle[] = [
+  { featureType: "poi.business", stylers: [{ visibility: "off" }] },
+  { featureType: "transit", stylers: [{ visibility: "off" }] },
+];
 
 export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   const mapped = restaurants.filter((r) => r.location);
@@ -84,6 +87,7 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
           zoom: 13,
           styles: mapStyles,
           disableDefaultUI: true,
+          clickableIcons: false,
           gestureHandling: "greedy",
           zoomControl: true,
           mapTypeControl: false,
@@ -111,21 +115,27 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
 
           const content = document.createElement("div");
           const html = `
-<div style="position:relative; padding:10px 14px 12px 14px; margin:0; color:#0b0b0b; font-family:'Helvetica Neue',Arial,sans-serif;">
-  <button data-close style="position:absolute; top:6px; right:6px; width:28px; height:28px; border:none; background:transparent; color:#0b0b0b; cursor:pointer; font-size:20px; line-height:1; padding:0; border-radius:9999px; font-weight:700;">×</button>
+<div style="position:relative; padding:8px 14px 12px 14px; margin:0; color:#0b0b0b; font-family:'Helvetica Neue',Arial,sans-serif;">
+  <button data-close style="position:absolute; top:4px; right:4px; width:28px; height:28px; border:none; background:transparent; color:#0b0b0b; cursor:pointer; font-size:20px; line-height:1; padding:0; border-radius:9999px; font-weight:700; outline:none; box-shadow:none; -webkit-appearance:none; -webkit-tap-highlight-color: transparent;">×</button>
   <div style="max-width:220px; margin:0; padding:0; line-height:1.45; color:#0b0b0b;">
     <div style="font-weight:600; margin:0; padding:0 24px 0 0; color:#0b0b0b;">${r.name}</div>
-    <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; margin:4px 0 0 0; padding:0; color:#0b0b0b;">
+    <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; margin:3px 0 0 0; padding:0; color:#0b0b0b;">
       ${r.category.replaceAll("_", " ")}
     </div>
     ${
       r.location?.area
-        ? `<div style="margin:6px 0 0 0; font-size:12px; padding:0; color:#0b0b0b;">${r.location.area}</div>`
+        ? `<div style="margin:5px 0 0 0; font-size:12px; padding:0; color:#0b0b0b;">${r.location.area}</div>`
         : ""
     }
-    <div style="margin:10px 0 0 0; padding:0;">
-      <a href="${mapsUrl}" target="_blank" rel="noopener" style="color:#0b0b0b; font-size:12px; font-weight:600; text-decoration:none;">
-        View on Google Maps ↗
+    <div style="margin:10px 0 0 0; padding:0; display:flex; align-items:center; gap:6px;">
+      <a href="${mapsUrl}" target="_blank" rel="noopener" style="color:#0b0b0b; font-size:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; -webkit-tap-highlight-color: transparent;">
+        <span>View on Google Maps</span>
+        <span style="display:inline-flex; width:14px; height:14px;">
+          <svg viewBox="0 0 16 16" fill="none" stroke="#0b0b0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12 12 4" />
+            <path d="M6 4h6v6" />
+          </svg>
+        </span>
       </a>
     </div>
   </div>
