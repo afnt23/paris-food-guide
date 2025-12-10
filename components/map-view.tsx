@@ -1,17 +1,13 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { importLibrary, setOptions } from "@googlemaps/js-api-loader";
+import { useEffect, useRef, useState } from "react";
 import { Restaurant } from "@/data/restaurants";
 
 type MapViewProps = {
   restaurants: Restaurant[];
   variant?: "light" | "dark";
 };
-
-const MAP_CENTER: [number, number] = [48.8588897, 2.320041];
 
 type PinStyle = { fill: string; border: string };
 
@@ -32,168 +28,192 @@ function categoryBucket(category: string): keyof typeof palette {
   return "food";
 }
 
-function formatCategory(category: string) {
-  return category
-    .split("_")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
-function buildIcon(category: string) {
-  const bucket = categoryBucket(category);
-  const { fill, border } = palette[bucket];
-  return L.divIcon({
-    className: "",
-    html: `<span style="
-      display:block;
-      width:14px;
-      height:14px;
-      border-radius:9999px;
-      background:${fill};
-      border:2px solid ${border};
-      box-shadow:0 6px 18px rgba(0,0,0,0.25);
-    " />`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9],
-  });
-}
+const mapStyles: google.maps.MapTypeStyle[] = [
+  { elementType: "geometry", stylers: [{ color: "#0b0b0b" }] },
+  { elementType: "labels.text.fill", stylers: [{ color: "#f3f4f6" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#0b0b0b" }] },
+  {
+    featureType: "administrative",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#9ca3af" }],
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#9ca3af" }],
+  },
+  {
+    featureType: "poi.business",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "geometry",
+    stylers: [{ color: "#14532d" }],
+  },
+  {
+    featureType: "poi.park",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#c6f6d5" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ color: "#1f2937" }],
+  },
+  {
+    featureType: "road",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#111827" }],
+  },
+  {
+    featureType: "road",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#e5e7eb" }],
+  },
+  {
+    featureType: "transit",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#0f172a" }],
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#94a3b8" }],
+  },
+];
 
 export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   const mapped = restaurants.filter((r) => r.location);
-  const isDark = variant === "dark";
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!mapped.length) {
+  const apiKey =
+    process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
+    process.env.GOOGLE_MAPS_API_KEY ||
+    "";
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+    if (!apiKey || !mapped.length) return;
+
+    let map: google.maps.Map | null = null;
+    const markers: google.maps.marker.AdvancedMarkerElement[] = [];
+    let cancelled = false;
+
+    setOptions({
+      key: apiKey,
+      language: "en",
+      region: "FR",
+    });
+
+    (async () => {
+      try {
+        const [{ Map }, { AdvancedMarkerElement, PinElement }] =
+          await Promise.all([
+            importLibrary("maps") as Promise<google.maps.MapsLibrary>,
+            importLibrary("marker") as Promise<google.maps.MarkerLibrary>,
+          ]);
+
+        if (cancelled || !mapRef.current) return;
+
+        map = new Map(mapRef.current, {
+          center: { lat: mapped[0].location!.lat, lng: mapped[0].location!.lon },
+          zoom: 13,
+          styles: mapStyles,
+          disableDefaultUI: true,
+          gestureHandling: "greedy",
+          zoomControl: true,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false,
+          backgroundColor: variant === "dark" ? "#000" : "#fff",
+        });
+
+        const bounds = new google.maps.LatLngBounds();
+
+        mapped.forEach((r) => {
+          const bucket = categoryBucket(r.category);
+          const { fill, border } = palette[bucket];
+
+          const pin = new PinElement({
+            background: fill,
+            borderColor: border,
+            glyphColor: "#fff",
+          });
+
+          const marker = new AdvancedMarkerElement({
+            position: { lat: r.location!.lat, lng: r.location!.lon },
+            map,
+            title: r.name,
+            content: pin.element,
+          });
+
+          const info = new google.maps.InfoWindow({
+            content: `
+              <div style="color:#0b0b0b; font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 220px;">
+                <div style="font-weight:600; margin-bottom:4px;">${r.name}</div>
+                <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#4b5563;">${r.category.replaceAll(
+                  "_",
+                  " ",
+                )}</div>
+                ${
+                  r.location?.area
+                    ? `<div style="margin-top:4px; font-size:12px; color:#6b7280;">${r.location.area}</div>`
+                    : ""
+                }
+              </div>
+            `,
+          });
+
+          marker.addListener("click", () => {
+            info.open({ anchor: marker, map });
+          });
+
+          markers.push(marker);
+          bounds.extend(marker.position!);
+        });
+
+        map.fitBounds(bounds, 60);
+      } catch (err) {
+        if (!cancelled) {
+          setError((err as Error).message || "Failed to load map");
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      markers.forEach((m) => m.map = null);
+      if (map) {
+        map = null;
+      }
+    };
+  }, [apiKey, mapped, variant]);
+
+  if (!apiKey || !mapped.length) {
     return (
-      <div className="flex h-80 items-center justify-center rounded-2xl border border-neutral-200 bg-white text-neutral-500">
-        No map pins yet for this filter.
+      <div className="flex h-80 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm text-white/70">
+        {apiKey ? "No map pins yet for this filter." : "Missing Google Maps API key"}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-80 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm text-white/70">
+        {error}
       </div>
     );
   }
 
   return (
-    <div
-      className={`overflow-hidden rounded-2xl border shadow-sm ${
-        isDark
-          ? "border-white/10 bg-black"
-          : "border-neutral-200 bg-white"
-      }`}
-    >
-      <MapContainer
-        center={MAP_CENTER}
-        zoom={13}
-        scrollWheelZoom
-        style={{ height: "360px", width: "100%" }}
-        className="[&_.leaflet-container]:rounded-2xl"
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {mapped.map((restaurant) => (
-          <Marker
-            key={restaurant.slug}
-            position={[restaurant.location!.lat, restaurant.location!.lon]}
-            icon={buildIcon(restaurant.category)}
-          >
-            <Popup>
-              <div className="space-y-1">
-                <p className="font-semibold text-neutral-900">
-                  {restaurant.name}
-                </p>
-                <p className="text-xs uppercase tracking-[0.14em] text-neutral-600">
-                  {formatCategory(restaurant.category)}
-                </p>
-                {restaurant.location?.area ? (
-                  <p className="text-xs text-neutral-700">
-                    {restaurant.location.area}
-                  </p>
-                ) : null}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
-  );
-}
-
-function MapReady({ onReady }: { onReady: (map: L.Map) => void }) {
-  const map = useMap();
-  useEffect(() => {
-    onReady(map);
-  }, [map, onReady]);
-  return null;
-}
-
-// Keep map sizing correct after filters change
-export function MapViewWithSizeFix(props: MapViewProps) {
-  const { restaurants, variant } = props;
-  const mapped = restaurants.filter((r) => r.location);
-  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  const isDark = variant === "dark";
-
-  useEffect(() => {
-    if (!mapInstance) return;
-    const id = setTimeout(() => {
-      mapInstance.invalidateSize();
-    }, 50);
-    return () => clearTimeout(id);
-  }, [mapInstance, mapped.length]);
-
-  if (!mapped.length) {
-    return (
-      <div
-        className={`flex h-80 items-center justify-center rounded-2xl border text-sm ${
-          isDark ? "border-white/10 bg-black text-white/60" : "border-neutral-200 bg-white text-neutral-500"
-        }`}
-      >
-        No map pins yet for this filter.
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={`overflow-hidden rounded-2xl border shadow-sm ${
-        isDark ? "border-white/10 bg-black" : "border-neutral-200 bg-white"
-      }`}
-    >
-      <MapContainer
-        center={MAP_CENTER}
-        zoom={13}
-        scrollWheelZoom
-        style={{ height: "360px", width: "100%" }}
-        className="[&_.leaflet-container]:rounded-2xl"
-      >
-        <MapReady onReady={setMapInstance} />
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {mapped.map((restaurant) => (
-          <Marker
-            key={restaurant.slug}
-            position={[restaurant.location!.lat, restaurant.location!.lon]}
-            icon={buildIcon(restaurant.category)}
-          >
-            <Popup>
-              <div className="space-y-1">
-                <p className="font-semibold text-neutral-900">
-                  {restaurant.name}
-                </p>
-                <p className="text-xs uppercase tracking-[0.14em] text-neutral-600">
-                  {formatCategory(restaurant.category)}
-                </p>
-                {restaurant.location?.area ? (
-                  <p className="text-xs text-neutral-700">
-                    {restaurant.location.area}
-                  </p>
-                ) : null}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-sm">
+      <div ref={mapRef} className="h-[360px] w-full" />
     </div>
   );
 }

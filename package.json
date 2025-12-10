@@ -10,6 +10,7 @@
     "resolve:places": "node scripts/resolve-places.js"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^2.0.2",
     "leaflet": "^1.9.4",
     "next": "16.0.8",
     "react": "19.2.1",

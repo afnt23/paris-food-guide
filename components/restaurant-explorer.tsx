@@ -50,7 +50,7 @@ export function RestaurantExplorer({
 
   const MapView = useMemo(
     () =>
-      dynamic(() => import("./map-view").then((mod) => mod.MapViewWithSizeFix), {
+      dynamic(() => import("./map-view").then((mod) => mod.MapView), {
         ssr: false,
       }),
     [],
