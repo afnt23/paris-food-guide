@@ -15,6 +15,7 @@ export type Restaurant = {
   status: RestaurantStatus;
   location?: RestaurantLocation;
   placeId?: string;
+  photo?: string;
 };
 
 export const restaurants: Restaurant[] = [
@@ -30,7 +31,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.2507703,
       "area": "Bois de Boulogne / 16e"
     },
-    "placeId": "ChIJXZ9lqzZl5kcRxIInGxIRFaI"
+    "placeId": "ChIJXZ9lqzZl5kcRxIInGxIRFaI",
+    "photo": "/photos/la-ferme-du-pre-catelan.jpg"
   },
   {
     "slug": "les-enfants-du-marche",
