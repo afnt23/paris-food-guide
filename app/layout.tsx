@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,10 +8,13 @@ export const metadata: Metadata = {
   },
   description:
     "Oui Oui Baguette Croissant (OOBC): a minimal, cinematic guide to the rooms we actually love eating and drinking in Paris.",
-  themeColor: "#000000",
   appleWebApp: {
     statusBarStyle: "black-translucent",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({

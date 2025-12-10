@@ -1,9 +1,68 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+
+function HeroLogo() {
+  const [enlarged, setEnlarged] = useState(true);
+  const [animateIn, setAnimateIn] = useState(true);
+
+  const openLogo = () => {
+    setEnlarged(true);
+    requestAnimationFrame(() => setAnimateIn(true));
+  };
+
+  const closeLogo = () => {
+    setAnimateIn(false);
+    setEnlarged(false);
+  };
+
+  return (
+    <>
+      <button
+        onClick={openLogo}
+        className="focus:outline-none"
+        aria-label="Open logo"
+      >
+        <Image
+          src="/oobc-logo.png"
+          alt="Oui Oui Baguette Croissant logo"
+          width={112}
+          height={112}
+          className="h-28 w-28 object-contain"
+          priority
+        />
+      </button>
+      {enlarged ? (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-700 ${
+            animateIn ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={closeLogo}
+          role="presentation"
+        >
+          <div className="focus:outline-none">
+            <Image
+              src="/oobc-logo.png"
+              alt="Oui Oui Baguette Croissant logo"
+              width={320}
+              height={320}
+              className={`h-72 w-72 transform object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-transform duration-1400 ease-out ${
+                animateIn ? "scale-110" : "scale-50"
+              }`}
+              priority
+            />
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-[100dvh] overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen min-h-[100svh] overflow-hidden bg-black text-white">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -17,14 +76,7 @@ export default function HomePage() {
       <div className="relative flex min-h-[100dvh] flex-col justify-between px-6 pb-[max(env(safe-area-inset-bottom),3.5rem)] pt-[max(env(safe-area-inset-top),1rem)] sm:px-10 sm:pb-[max(env(safe-area-inset-bottom),4rem)] sm:pt-[max(env(safe-area-inset-top),1.5rem)] md:px-16">
         <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
           <div className="flex items-center gap-3">
-            <Image
-              src="/oobc-logo.png"
-              alt="Oui Oui Baguette Croissant logo"
-              width={112}
-              height={112}
-              className="h-28 w-28 object-contain"
-              priority
-            />
+            <HeroLogo />
           </div>
           <span className="text-neutral-400">Only the good rooms</span>
         </header>

@@ -22,8 +22,8 @@ export function RestaurantExplorer({
   theme = "light",
 }: RestaurantExplorerProps) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [onlyMapped, setOnlyMapped] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(true);
   const isDark = theme === "dark";
 
   const categories = useMemo(() => {
@@ -39,13 +39,16 @@ export function RestaurantExplorer({
       ) {
         return false;
       }
-      if (onlyMapped && !restaurant.location) return false;
       return true;
     });
-  }, [restaurants, selectedCategories, onlyMapped]);
+  }, [restaurants, selectedCategories]);
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 640;
+      setFiltersOpen(!isMobile);
+    }
   }, []);
 
   const MapView = useMemo(
@@ -71,8 +74,27 @@ export function RestaurantExplorer({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center justify-between sm:hidden">
+          <button
+            type="button"
+            onClick={() => setFiltersOpen((prev) => !prev)}
+            className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm ${
+              isDark
+                ? "border-white/30 bg-white/5 text-white"
+                : "border-neutral-300 bg-white text-neutral-900"
+            }`}
+          >
+            {filtersOpen ? "Hide filters" : "Show filters"}
+            {selectedCategories.length > 0 ? (
+              <span className="rounded-full bg-black px-2 py-0.5 text-xs text-white">
+                {selectedCategories.length}
+              </span>
+            ) : null}
+          </button>
+        </div>
+
+        <div className={`${filtersOpen ? "flex" : "hidden"} flex-wrap items-center gap-2 sm:flex`}>
           <FilterChip
             active={allActive}
             label="All"
@@ -93,21 +115,6 @@ export function RestaurantExplorer({
               theme={theme}
             />
           ))}
-        </div>
-        <div
-          className={`ml-auto flex items-center gap-2 text-sm ${
-            isDark ? "text-white/80" : "text-neutral-700"
-          }`}
-        >
-          <label className="inline-flex cursor-pointer items-center gap-2">
-            <input
-              type="checkbox"
-              className="h-4 w-4 cursor-pointer accent-black"
-              checked={onlyMapped}
-              onChange={(e) => setOnlyMapped(e.target.checked)}
-            />
-            Show only with map pins
-          </label>
         </div>
       </div>
 
