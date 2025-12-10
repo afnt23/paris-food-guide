@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
       <video
-        className="absolute inset-0 h-full w-full object-cover brightness-[0.7]"
+        className="absolute inset-0 h-full w-full object-cover"
         autoPlay
         loop
         muted
@@ -13,8 +13,6 @@ export default function HomePage() {
       >
         <source src="/hero.mp4" type="video/mp4" />
       </video>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70" />
 
       <div className="relative flex min-h-screen flex-col justify-between px-6 pt-4 pb-14 sm:px-10 sm:pt-6 sm:pb-16 md:px-16">
         <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
