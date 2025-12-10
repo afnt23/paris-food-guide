@@ -74,77 +74,81 @@ export function RestaurantExplorer({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center justify-between sm:hidden">
-          <button
-            type="button"
-            onClick={() => setFiltersOpen((prev) => !prev)}
-            className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm ${
-              isDark
-                ? "border-white/30 bg-white/5 text-white"
-                : "border-neutral-300 bg-white text-neutral-900"
-            }`}
-          >
-            {filtersOpen ? "Hide filters" : "Show filters"}
-            {selectedCategories.length > 0 ? (
-              <span className="rounded-full bg-black px-2 py-0.5 text-xs text-white">
-                {selectedCategories.length}
-              </span>
-            ) : null}
-          </button>
-        </div>
+      <div className="lg:grid lg:grid-cols-[minmax(0,420px)_1fr] lg:items-start lg:gap-8">
+        <div className="sticky top-0 z-30 space-y-6 bg-black pb-4 pt-[max(env(safe-area-inset-top),0.5rem)] lg:top-0 lg:pb-6 lg:pr-4">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between sm:hidden">
+              <button
+                type="button"
+                onClick={() => setFiltersOpen((prev) => !prev)}
+                className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm ${
+                  isDark
+                    ? "border-white/30 bg-white/5 text-white"
+                    : "border-neutral-300 bg-white text-neutral-900"
+                }`}
+              >
+                {filtersOpen ? "Hide filters" : "Show filters"}
+                {selectedCategories.length > 0 ? (
+                  <span className="rounded-full bg-black px-2 py-0.5 text-xs text-white">
+                    {selectedCategories.length}
+                  </span>
+                ) : null}
+              </button>
+            </div>
 
-        <div className={`${filtersOpen ? "flex" : "hidden"} flex-wrap items-center gap-2 sm:flex`}>
-          <FilterChip
-            active={allActive}
-            label="All"
-            onClick={clearCategories}
-            theme={theme}
-          />
-          {categories.map((cat) => (
-            <FilterChip
-              key={cat}
-              active={selectedCategories.includes(cat)}
-              label={formatCategory(cat)}
-              onClick={() => toggleCategory(cat)}
-              onRemove={() =>
-                setSelectedCategories((prev) =>
-                  prev.filter((c) => c !== cat),
-                )
-              }
-              theme={theme}
-            />
-          ))}
-        </div>
-      </div>
+            <div className={`${filtersOpen ? "flex" : "hidden"} flex-wrap items-center gap-2 sm:flex`}>
+              <FilterChip
+                active={allActive}
+                label="All"
+                onClick={clearCategories}
+                theme={theme}
+              />
+              {categories.map((cat) => (
+                <FilterChip
+                  key={cat}
+                  active={selectedCategories.includes(cat)}
+                  label={formatCategory(cat)}
+                  onClick={() => toggleCategory(cat)}
+                  onRemove={() =>
+                    setSelectedCategories((prev) =>
+                      prev.filter((c) => c !== cat),
+                    )
+                  }
+                  theme={theme}
+                />
+              ))}
+            </div>
+          </div>
 
-      {mounted ? (
-        <MapView
-          restaurants={filtered}
-          variant={isDark ? "dark" : "light"}
-        />
-      ) : (
-        <div className="flex h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm text-white/60">
-          Loading map…
-        </div>
-      )}
-
-      {filtered.length ? (
-        <div className="grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((restaurant) => (
-            <RestaurantCard
-              key={restaurant.slug}
-              restaurant={restaurant}
-              href={`/restaurants/${restaurant.slug}`}
+          {mounted ? (
+            <MapView
+              restaurants={filtered}
               variant={isDark ? "dark" : "light"}
             />
-          ))}
+          ) : (
+            <div className="flex h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm text-white/60">
+              Loading map…
+            </div>
+          )}
         </div>
-      ) : (
-        <p className={isDark ? "text-white/70" : "text-neutral-600"}>
-          No spots match this filter.
-        </p>
-      )}
+
+        {filtered.length ? (
+          <div className="mt-6 grid w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:mt-0 lg:grid-cols-2 xl:grid-cols-3">
+            {filtered.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.slug}
+                restaurant={restaurant}
+                href={`/restaurants/${restaurant.slug}`}
+                variant={isDark ? "dark" : "light"}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className={isDark ? "text-white/70" : "text-neutral-600"}>
+            No spots match this filter.
+          </p>
+        )}
+      </div>
     </div>
   );
 }
