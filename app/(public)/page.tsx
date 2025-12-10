@@ -81,7 +81,7 @@ export default function HomePage() {
 
   return (
     <main
-      className="relative min-h-screen min-h-[100svh] min-h-[100dvh] overflow-hidden bg-black text-white"
+      className="relative h-full overflow-hidden bg-black text-white"
       style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
     >
       <video
@@ -95,7 +95,7 @@ export default function HomePage() {
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      <div className="relative flex min-h-[100dvh] flex-col justify-between px-6 pb-[max(env(safe-area-inset-bottom),3.5rem)] pt-[max(env(safe-area-inset-top),1rem)] sm:px-10 sm:pb-[max(env(safe-area-inset-bottom),4rem)] sm:pt-[max(env(safe-area-inset-top),1.5rem)] md:px-16">
+      <div className="relative flex min-h-full flex-col justify-between px-6 pb-[max(env(safe-area-inset-bottom),3.5rem)] pt-[max(env(safe-area-inset-top),1rem)] sm:px-10 sm:pb-[max(env(safe-area-inset-bottom),4rem)] sm:pt-[max(env(safe-area-inset-top),1.5rem)] md:px-16">
         <header className="flex items-center justify-start text-[11px] uppercase tracking-[0.28em] text-neutral-300">
           <div className="flex items-center gap-3">
             <HeroLogo />
