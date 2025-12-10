@@ -2,8 +2,8 @@
 
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect, useRef, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, type Map } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { Restaurant } from "@/data/restaurants";
 
 type MapViewProps = {
@@ -61,7 +61,6 @@ function buildIcon(category: string) {
 export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   const mapped = restaurants.filter((r) => r.location);
   const isDark = variant === "dark";
-  const mapRef = useRef<Map | null>(null);
 
   if (!mapped.length) {
     return (
@@ -85,9 +84,6 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
         scrollWheelZoom
         style={{ height: "360px", width: "100%" }}
         className="[&_.leaflet-container]:rounded-2xl"
-        whenCreated={(mapInstance) => {
-          mapRef.current = mapInstance;
-        }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
@@ -121,11 +117,19 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   );
 }
 
+function MapReady({ onReady }: { onReady: (map: L.Map) => void }) {
+  const map = useMap();
+  useEffect(() => {
+    onReady(map);
+  }, [map, onReady]);
+  return null;
+}
+
 // Keep map sizing correct after filters change
 export function MapViewWithSizeFix(props: MapViewProps) {
   const { restaurants, variant } = props;
   const mapped = restaurants.filter((r) => r.location);
-  const [mapInstance, setMapInstance] = useState<Map | null>(null);
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
   const isDark = variant === "dark";
 
   useEffect(() => {
@@ -160,8 +164,8 @@ export function MapViewWithSizeFix(props: MapViewProps) {
         scrollWheelZoom
         style={{ height: "360px", width: "100%" }}
         className="[&_.leaflet-container]:rounded-2xl"
-        whenCreated={setMapInstance}
       >
+        <MapReady onReady={setMapInstance} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
