@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function HeroLogo() {
   const [enlarged, setEnlarged] = useState(true);
@@ -61,14 +61,36 @@ function HeroLogo() {
 }
 
 export default function HomePage() {
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (typeof window === "undefined") return;
+      const vv = window.visualViewport;
+      const height = vv?.height ?? window.innerHeight;
+      setViewportHeight(height);
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    window.addEventListener("orientationchange", updateHeight);
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+      window.removeEventListener("orientationchange", updateHeight);
+    };
+  }, []);
+
   return (
-    <main className="relative min-h-screen min-h-[100svh] min-h-[100dvh] overflow-hidden bg-black text-white">
+    <main
+      className="relative min-h-screen min-h-[100svh] min-h-[100dvh] overflow-hidden bg-black text-white"
+      style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
+    >
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
         loop
         muted
         playsInline
+        style={viewportHeight ? { height: `${viewportHeight}px` } : undefined}
       >
         <source src="/hero.mp4" type="video/mp4" />
       </video>
