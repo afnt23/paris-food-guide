@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { Restaurant } from "@/data/restaurants";
 import { RestaurantCard } from "./restaurant-card";
@@ -44,10 +44,9 @@ export function RestaurantExplorer({
     });
   }, [restaurants, selectedCategories, onlyMapped]);
 
-  const mappedRestaurants = useMemo(
-    () => filtered.filter((r) => r.location),
-    [filtered],
-  );
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const MapView = useMemo(
     () =>
@@ -56,10 +55,6 @@ export function RestaurantExplorer({
       }),
     [],
   );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleCategory = (cat: string) => {
     setSelectedCategories((prev) => {
@@ -118,7 +113,7 @@ export function RestaurantExplorer({
 
       {mounted ? (
         <MapView
-          restaurants={mappedRestaurants}
+          restaurants={filtered}
           variant={isDark ? "dark" : "light"}
         />
       ) : (
