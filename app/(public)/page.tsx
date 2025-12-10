@@ -47,7 +47,19 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 rounded-full border border-white/40 px-4 py-3 text-neutral-50 transition duration-300 hover:border-white hover:text-white"
             >
               Admin
-              <span className="text-lg leading-none">↗</span>
+              <svg
+                aria-hidden
+                viewBox="0 0 16 16"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M4 12 12 4" />
+                <path d="M6 4h6v6" />
+              </svg>
             </Link>
           </div>
         </div>
