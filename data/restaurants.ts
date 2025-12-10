@@ -46,7 +46,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.3621245,
       "area": "Haut Marais / 3e"
     },
-    "placeId": "ChIJpTwIKARu5kcRUrI2FD8IWmE"
+    "placeId": "ChIJpTwIKARu5kcRUrI2FD8IWmE",
+    "photo": "/photos/photo_huge_lieu_r10132543_1.jpg"
   },
   {
     "slug": "aux-crus-de-bourgogne",
@@ -60,7 +61,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8658261,
       "lon": 2.3465718,
       "area": "3 Rue Bachaumont, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/img_6853-scaled.jpg"
   },
   {
     "slug": "restaurant-kei",
@@ -74,7 +76,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.864358,
       "lon": 2.3420827,
       "area": "5 Rue Coq Héron, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/dining_room.jpeg"
   },
   {
     "slug": "table-bruno-verjus",
@@ -88,7 +91,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.84880159999999,
       "lon": 2.3758487,
       "area": "3 R. de Prague, 75012 Paris, France"
-    }
+    },
+    "photo": "/photos/table3.jpg"
   },
   {
     "slug": "element-terre",
@@ -102,7 +106,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.87298,
       "lon": 2.3504567,
       "area": "32 Rue d'Hauteville, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/CaptureERTYU-large.jpg"
   },
   {
     "slug": "le-mermoz",

@@ -7,6 +7,8 @@ import { Restaurant } from "@/data/restaurants";
 type MapViewProps = {
   restaurants: Restaurant[];
   variant?: "light" | "dark";
+  onSelect?: (slug: string | null) => void;
+  interactive?: boolean;
 };
 
 type PinStyle = { fill: string; border: string };
@@ -33,7 +35,12 @@ const mapStyles: google.maps.MapTypeStyle[] = [
   { featureType: "transit", stylers: [{ visibility: "off" }] },
 ];
 
-export function MapView({ restaurants, variant = "light" }: MapViewProps) {
+export function MapView({
+  restaurants,
+  variant = "light",
+  onSelect,
+  interactive = true,
+}: MapViewProps) {
   const mapped = restaurants.filter((r) => r.location);
   const mapRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -102,9 +109,12 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
             activeInfo.close();
             activeInfo = null;
           }
+          onSelect?.(null);
         };
 
-        listeners.push(map.addListener("click", closeActive));
+        if (interactive) {
+          listeners.push(map.addListener("click", closeActive));
+        }
 
         mapped.forEach((r) => {
           const bucket = categoryBucket(r.category);
@@ -169,9 +179,11 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
           }
 
           marker.addListener("click", () => {
+            if (!interactive) return;
             closeActive();
             activeInfo = info;
             info.open({ anchor: marker, map });
+            onSelect?.(r.slug);
           });
 
           markers.push(marker);
@@ -196,8 +208,9 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
       if (map) {
         map = null;
       }
+      onSelect?.(null);
     };
-  }, [apiKey, mapped, variant]);
+  }, [apiKey, interactive, mapped, onSelect, variant]);
 
   if (!apiKey || !mapped.length) {
     return (
