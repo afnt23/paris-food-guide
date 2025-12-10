@@ -9,8 +9,8 @@ export default function RestaurantsPage() {
   const publishedRestaurants = getPublishedRestaurants();
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-16 sm:px-10 sm:py-20">
+    <main className="min-h-[100dvh] bg-black text-white">
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-[max(env(safe-area-inset-bottom),4rem)] pt-[max(env(safe-area-inset-top),4rem)] sm:px-10">
         <header className="flex flex-col gap-3">
           <p className="text-xs uppercase tracking-[0.24em] text-white/60">
             Published spots

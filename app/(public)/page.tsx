@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative min-h-[100dvh] overflow-hidden bg-black text-white">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -14,7 +14,7 @@ export default function HomePage() {
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      <div className="relative flex min-h-screen flex-col justify-between px-6 pt-4 pb-14 sm:px-10 sm:pt-6 sm:pb-16 md:px-16">
+      <div className="relative flex min-h-[100dvh] flex-col justify-between px-6 pb-[max(env(safe-area-inset-bottom),3.5rem)] pt-[max(env(safe-area-inset-top),1rem)] sm:px-10 sm:pb-[max(env(safe-area-inset-bottom),4rem)] sm:pt-[max(env(safe-area-inset-top),1.5rem)] md:px-16">
         <header className="flex items-center justify-between text-[11px] uppercase tracking-[0.28em] text-neutral-300">
           <div className="flex items-center gap-3">
             <Image
