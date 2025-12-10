@@ -76,7 +76,7 @@ export function RestaurantExplorer({
     <div className="flex flex-col gap-8">
       <div className="lg:grid lg:grid-cols-[minmax(0,420px)_1fr] lg:items-start lg:gap-8">
         <div className="lg:sticky lg:top-0 lg:z-20 lg:space-y-6 lg:pb-6 lg:pt-[max(env(safe-area-inset-top),0.5rem)] lg:pr-4">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 pb-2">
             <div className="flex items-center justify-between sm:hidden">
               <button
                 type="button"
