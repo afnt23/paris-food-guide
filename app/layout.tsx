@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   appleWebApp: {
     statusBarStyle: "black-translucent",
   },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {
