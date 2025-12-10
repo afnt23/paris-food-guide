@@ -16,6 +16,15 @@ function formatCategory(category: string) {
     .join(" ");
 }
 
+function buildMapsUrl(restaurant: Restaurant) {
+  const query = restaurant.location?.area
+    ? `${restaurant.name} ${restaurant.location.area}`
+    : restaurant.name;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    query,
+  )}`;
+}
+
 export function RestaurantCard({
   restaurant,
   href,
@@ -28,25 +37,15 @@ export function RestaurantCard({
     ? "border-white/10 bg-white/5 text-white shadow-none hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
     : "border-neutral-200/80 bg-white/90 text-neutral-900 shadow-sm shadow-black/5 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10";
 
-  const categoryClasses = isDark
-    ? "text-white/70"
-    : "text-neutral-500";
+  const categoryClasses = "text-black";
 
-  const titleClasses = isDark
-    ? "text-white"
-    : "text-neutral-950";
+  const titleClasses = isDark ? "text-white" : "text-neutral-950";
 
-  const descriptionClasses = isDark
-    ? "text-white/70"
-    : "text-neutral-600";
+  const descriptionClasses = isDark ? "text-white/70" : "text-neutral-600";
 
-  const linkClasses = isDark
-    ? "text-white"
-    : "text-neutral-900";
+  const linkClasses = isDark ? "text-white" : "text-neutral-900";
 
-  const linkBarClasses = isDark
-    ? "bg-white"
-    : "bg-neutral-900";
+  const linkBarClasses = isDark ? "bg-white" : "bg-neutral-900";
 
   return (
     <article
@@ -77,6 +76,14 @@ export function RestaurantCard({
           className={`h-px w-10 transition-all duration-300 group-hover:w-16 ${linkBarClasses}`}
         />
       </Link>
+      <a
+        href={buildMapsUrl(restaurant)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`text-xs font-semibold uppercase tracking-[0.18em] underline-offset-4 transition hover:underline ${linkClasses}`}
+      >
+        View on Google Maps
+      </a>
     </article>
   );
 }

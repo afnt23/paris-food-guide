@@ -12,10 +12,10 @@ type MapViewProps = {
 type PinStyle = { fill: string; border: string };
 
 const palette: Record<string, PinStyle> = {
-  wine: { fill: "#065f46", border: "#ecfdf3" },
-  cocktail: { fill: "#d97706", border: "#fff7ed" },
-  coffee: { fill: "#312e81", border: "#ede9fe" },
-  food: { fill: "#111827", border: "#f9fafb" },
+  wine: { fill: "#0b0b0b", border: "#e5e7eb" },
+  cocktail: { fill: "#0b0b0b", border: "#e5e7eb" },
+  coffee: { fill: "#0b0b0b", border: "#e5e7eb" },
+  food: { fill: "#0b0b0b", border: "#e5e7eb" },
 };
 
 function categoryBucket(category: string): keyof typeof palette {
@@ -28,64 +28,7 @@ function categoryBucket(category: string): keyof typeof palette {
   return "food";
 }
 
-const mapStyles: google.maps.MapTypeStyle[] = [
-  { elementType: "geometry", stylers: [{ color: "#0b0b0b" }] },
-  { elementType: "labels.text.fill", stylers: [{ color: "#f3f4f6" }] },
-  { elementType: "labels.text.stroke", stylers: [{ color: "#0b0b0b" }] },
-  {
-    featureType: "administrative",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#9ca3af" }],
-  },
-  {
-    featureType: "poi",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#9ca3af" }],
-  },
-  {
-    featureType: "poi.business",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.park",
-    elementType: "geometry",
-    stylers: [{ color: "#14532d" }],
-  },
-  {
-    featureType: "poi.park",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#c6f6d5" }],
-  },
-  {
-    featureType: "road",
-    elementType: "geometry",
-    stylers: [{ color: "#1f2937" }],
-  },
-  {
-    featureType: "road",
-    elementType: "geometry.stroke",
-    stylers: [{ color: "#111827" }],
-  },
-  {
-    featureType: "road",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#e5e7eb" }],
-  },
-  {
-    featureType: "transit",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "water",
-    elementType: "geometry",
-    stylers: [{ color: "#0f172a" }],
-  },
-  {
-    featureType: "water",
-    elementType: "labels.text.fill",
-    stylers: [{ color: "#94a3b8" }],
-  },
-];
+const mapStyles: google.maps.MapTypeStyle[] = [];
 
 export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   const mapped = restaurants.filter((r) => r.location);
@@ -102,7 +45,7 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
     if (!apiKey || !mapped.length) return;
 
     let map: google.maps.Map | null = null;
-    const markers: google.maps.marker.AdvancedMarkerElement[] = [];
+    const markers: google.maps.Marker[] = [];
     let cancelled = false;
 
     setOptions({
@@ -113,11 +56,9 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
 
     (async () => {
       try {
-        const [{ Map }, { AdvancedMarkerElement, PinElement }] =
-          await Promise.all([
-            importLibrary("maps") as Promise<google.maps.MapsLibrary>,
-            importLibrary("marker") as Promise<google.maps.MarkerLibrary>,
-          ]);
+        const [{ Map }] = await Promise.all([
+          importLibrary("maps") as Promise<google.maps.MapsLibrary>,
+        ]);
 
         if (cancelled || !mapRef.current) return;
 
@@ -139,18 +80,22 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
         mapped.forEach((r) => {
           const bucket = categoryBucket(r.category);
           const { fill, border } = palette[bucket];
+          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            r.location?.area ? `${r.name} ${r.location.area}` : r.name,
+          )}`;
 
-          const pin = new PinElement({
-            background: fill,
-            borderColor: border,
-            glyphColor: "#fff",
-          });
-
-          const marker = new AdvancedMarkerElement({
+          const marker = new google.maps.Marker({
             position: { lat: r.location!.lat, lng: r.location!.lon },
             map,
             title: r.name,
-            content: pin.element,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: fill,
+              fillOpacity: 0.9,
+              strokeColor: border,
+              strokeWeight: 1.6,
+              scale: 6,
+            },
           });
 
           const info = new google.maps.InfoWindow({
@@ -166,6 +111,11 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
                     ? `<div style="margin-top:4px; font-size:12px; color:#6b7280;">${r.location.area}</div>`
                     : ""
                 }
+                <div style="margin-top:8px;">
+                  <a href="${mapsUrl}" target="_blank" rel="noopener" style="color:#111827; font-size:12px; font-weight:600; text-decoration:none;">
+                    View on Google Maps ↗
+                  </a>
+                </div>
               </div>
             `,
           });
@@ -175,7 +125,7 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
           });
 
           markers.push(marker);
-          bounds.extend(marker.position!);
+          bounds.extend(marker.getPosition()!);
         });
 
         map.fitBounds(bounds, 60);
@@ -188,7 +138,7 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
 
     return () => {
       cancelled = true;
-      markers.forEach((m) => m.map = null);
+      markers.forEach((m) => m.setMap(null));
       if (map) {
         map = null;
       }
@@ -212,7 +162,7 @@ export function MapView({ restaurants, variant = "light" }: MapViewProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
       <div ref={mapRef} className="h-[360px] w-full" />
     </div>
   );
