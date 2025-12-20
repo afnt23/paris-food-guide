@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
 
 html,
 body {
@@ -11,8 +12,8 @@ body {
 
 body {
   min-height: 100svh;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  letter-spacing: 0.01em;
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.005em;
 }
 
 a {

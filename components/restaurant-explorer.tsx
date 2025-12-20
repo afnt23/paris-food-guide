@@ -143,11 +143,7 @@ export function RestaurantExplorer({
               />
             ))}
           </div>
-        ) : (
-          <p className={isDark ? "text-white/70" : "text-neutral-600"}>
-            No spots match this filter.
-          </p>
-        )}
+        ) : null}
       </div>
     </div>
   );

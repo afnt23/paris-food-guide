@@ -65,21 +65,6 @@ export const restaurants: Restaurant[] = [
     "photo": "/photos/img_6853-scaled.jpg"
   },
   {
-    "slug": "restaurant-kei",
-    "name": "Restaurant Kei",
-    "category": "tasting_menu",
-    "status": "PUBLISHED",
-    "shortDescription": "3-star Franco-Japanese tasting near the Louvre; immaculate, white-glove service.",
-    "longDescription": "Kei Kobayashi’s flagship: precise, feather-light tasting menus blending French technique and Japanese clarity. Formal but warm, worth the splurge.",
-    "placeId": "ChIJqTnaAiNu5kcRQsRFgf8qeoA",
-    "location": {
-      "lat": 48.864358,
-      "lon": 2.3420827,
-      "area": "5 Rue Coq Héron, 75001 Paris, France"
-    },
-    "photo": "/photos/dining_room.jpeg"
-  },
-  {
     "slug": "table-bruno-verjus",
     "name": "Table Bruno Verjus",
     "category": "tasting_menu",
@@ -121,7 +106,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8707341,
       "lon": 2.3115407,
       "area": "16 Rue Jean Mermoz, 75008 Paris, France"
-    }
+    },
+    "photo": "/photos/ob_334dc3_20181106-122803.jpg"
   },
   {
     "slug": "le-collier-de-la-reine",
@@ -135,7 +121,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.87379319999999,
       "lon": 2.3500136,
       "area": "39 R. des Petites Écuries, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/MARINE_BILLET_COLLIER_DE_LA_REINE_1.jpg.webp.jpeg"
   },
   {
     "slug": "le-bon-georges",
@@ -149,7 +136,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8776756,
       "lon": 2.3371619,
       "area": "45 Rue Saint-Georges, 75009 Paris, France"
-    }
+    },
+    "photo": "/photos/Screenshot 2025-12-11 at 12.13.58.png"
   },
   {
     "slug": "chez-georges",
@@ -163,7 +151,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8664236,
       "lon": 2.3412876,
       "area": "1 Rue du Mail, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/georges_restaurant_paris.jpg"
   },
   {
     "slug": "septime",
@@ -177,21 +166,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8535723,
       "lon": 2.3809333,
       "area": "80 Rue de Charonne, 75011 Paris, France"
-    }
-  },
-  {
-    "slug": "le-comptoir-canaille",
-    "name": "Le Comptoir Canaille",
-    "category": "bistro",
-    "status": "PUBLISHED",
-    "shortDescription": "Family-run comfort bistro: ducky, saucy, buttery, zero ego.",
-    "longDescription": "Neighborhood favorite for rich classics and generous plates. Friendly service, great for a no-fuss, feel-good dinner.",
-    "placeId": "ChIJUac-q8xv5kcRI3Uc1kPu9Kg",
-    "location": {
-      "lat": 48.8793196,
-      "lon": 2.3340492,
-      "area": "31 Rue la Bruyère, 75009 Paris, France"
-    }
+    },
+    "photo": "/photos/photo_huge_lieu_usr802_1.jpg"
   },
   {
     "slug": "le-dauphin",
@@ -205,7 +181,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8694795,
       "lon": 2.3711865,
       "area": "131 Ave Parmentier, 75011 Paris, France"
-    }
+    },
+    "photo": "/photos/5590f455ce1c1-4ee92a2901adf147749dbb6195152160.jpg"
   },
   {
     "slug": "daroco",
@@ -219,7 +196,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8671501,
       "lon": 2.3392434,
       "area": "6 Rue Vivienne, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/daroco-bourse-2100x1400.jpg"
   },
   {
     "slug": "ogata",
@@ -233,7 +211,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.3635511,
       "area": "Upper Marais / 3e"
     },
-    "placeId": "ChIJexUJUzFv5kcRcynXsmuxF5o"
+    "placeId": "ChIJexUJUzFv5kcRcynXsmuxF5o",
+    "photo": "/photos/Ogata-Paris-0005.jpg.webp.jpeg"
   },
   {
     "slug": "abri-soba",
@@ -247,7 +226,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.3445873,
       "area": "South Pigalle / 9e"
     },
-    "placeId": "ChIJl2szvj9u5kcRztUQCxoG-Ew"
+    "placeId": "ChIJl2szvj9u5kcRztUQCxoG-Ew",
+    "photo": "/photos/ParisUpdate-Abri-Soba-restaurant2.jpg"
   },
   {
     "slug": "menkicchi-ramen",
@@ -261,7 +241,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.335564,
       "area": "Rue Sainte-Anne / 1e"
     },
-    "placeId": "ChIJq99pfklv5kcRm0NDwGCXyjo"
+    "placeId": "ChIJq99pfklv5kcRm0NDwGCXyjo",
+    "photo": "/photos/image.jpg.png"
   },
   {
     "slug": "mehmet",
@@ -275,7 +256,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.3458757,
       "area": "Rue Ramey / 18e"
     },
-    "placeId": "ChIJ0xni1Ltv5kcRYW_mCKvXjjk"
+    "placeId": "ChIJ0xni1Ltv5kcRYW_mCKvXjjk",
+    "photo": "/photos/5.jpg"
   },
   {
     "slug": "omar-dhiab",
@@ -289,7 +271,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8651795,
       "lon": 2.3418771,
       "area": "23 Rue Hérold, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/omar-dhiab-restaurant-ouve.jpeg"
   },
   {
     "slug": "chop-chop-love",
@@ -303,7 +286,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8706799,
       "lon": 2.3567059,
       "area": "48 Rue du Faubourg Saint-Martin, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/1jho85mHmtwbQIz0k7tXGc33XQ.jpg"
   },
   {
     "slug": "haikara-izakaya",
@@ -317,7 +301,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8663807,
       "lon": 2.3701875,
       "area": "82 Rue de la Folie Méricourt, 75011 Paris, France"
-    }
+    },
+    "photo": "/photos/17_58_22_925_image00009.jpeg"
   },
   {
     "slug": "le-404",
@@ -331,7 +316,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8644682,
       "lon": 2.3543194,
       "area": "69 Rue des Gravilliers, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/d0ee1654-0eb0-457d-a9ee-290dfb8fdab2.jpg"
   },
   {
     "slug": "dersou",
@@ -345,7 +331,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8513995,
       "lon": 2.374616,
       "area": "21 Rue Saint-Nicolas, 75012 Paris, France"
-    }
+    },
+    "photo": "/photos/image.jpg"
   },
   {
     "slug": "la-boutique-de-yamtcha",
@@ -359,7 +346,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8617019,
       "lon": 2.3424475,
       "area": "4 Rue Sauval, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/image333.jpg"
   },
   {
     "slug": "yamtcha",
@@ -373,7 +361,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8614427,
       "lon": 2.3417022,
       "area": "121 Rue Saint-Honoré, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/1350-restaurantyamtchaaparis.jpg"
   },
   {
     "slug": "junk",
@@ -387,7 +376,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8677042,
       "lon": 2.3440285,
       "area": "114 Rue Montmartre, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/caption.jpg"
   },
   {
     "slug": "dumbo",
@@ -401,7 +391,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8614633,
       "lon": 2.3642848,
       "area": "6 Rue de Poitou, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/image444.jpg"
   },
   {
     "slug": "cafe-courtial-la-crepe",
@@ -415,7 +406,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8615925,
       "lon": 2.342442,
       "area": "2 Rue Sauval, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/cafe-courtial-la-crepe.jpg"
   },
   {
     "slug": "soma-sando",
@@ -429,7 +421,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8486408,
       "lon": 2.3318359,
       "area": "62 Rue de Vaugirard, 75006 Paris, France"
-    }
+    },
+    "photo": "/photos/image44.jpg"
   },
   {
     "slug": "bagels-and-brownies",
@@ -443,7 +436,8 @@ export const restaurants: Restaurant[] = [
       "lon": 2.327287,
       "area": "6e / Notre-Dame-des-Champs"
     },
-    "placeId": "ChIJtZVrAs5x5kcRDElqqqLr6NY"
+    "placeId": "ChIJtZVrAs5x5kcRDElqqqLr6NY",
+    "photo": "/photos/unnamed.jpg"
   },
   {
     "slug": "stohrer",
@@ -457,77 +451,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8652644,
       "lon": 2.3468149,
       "area": "51 Rue Montorgueil, 75002 Paris, France"
-    }
-  },
-  {
-    "slug": "laize-sainte-avoye",
-    "name": "Laïzé Sainte-Avoye",
-    "category": "cafe",
-    "status": "PUBLISHED",
-    "shortDescription": "Taiwanese café oasis in the Marais; balanced vibe and gentle service.",
-    "longDescription": "Calm corner coffee/tea shop with Taiwanese snacks and a relaxed crowd. Ideal post-walk recharge away from the noise.",
-    "location": {
-      "lat": 48.8608379,
-      "lon": 2.355641700000001,
-      "area": "3e / Rue du Temple"
     },
-    "placeId": "ChIJk9Fzfhlv5kcR4YLivP9ACLw"
-  },
-  {
-    "slug": "the-coffee",
-    "name": "The Coffee",
-    "category": "cafe",
-    "status": "PUBLISHED",
-    "shortDescription": "Minimal specialty coffee bar on Rue Saint-Gilles; no fluff, just good beans.",
-    "longDescription": "Clean, tight space focused on well-sourced coffee. Quick counter service, great for a no-brainer morning stop.",
-    "location": {
-      "lat": 48.8640506,
-      "lon": 2.3560902,
-      "area": "3e / Rue Saint-Gilles"
-    },
-    "placeId": "ChIJqy6tbCBv5kcRl1oSrs_DXZk"
-  },
-  {
-    "slug": "dreaming-man",
-    "name": "Dreaming Man",
-    "category": "cafe",
-    "status": "PUBLISHED",
-    "shortDescription": "Matcha-forward minimalist café; tiny, peaceful, always delivers.",
-    "longDescription": "Known for excellent matcha and quiet vibes. Small, designy, and reliable when you need a calm caffeine fix.",
-    "placeId": "ChIJKWg3Cxdv5kcREXbIi08eznc",
-    "location": {
-      "lat": 48.86529609999999,
-      "lon": 2.3664931,
-      "area": "140 Rue Amelot, 75011 Paris, France"
-    }
-  },
-  {
-    "slug": "partisan-cafe",
-    "name": "Partisan Café",
-    "category": "cafe",
-    "status": "PUBLISHED",
-    "shortDescription": "Design-y specialty coffee that leans pretentious—beans and crowd both curated.",
-    "longDescription": "Expect good coffee, a styled space, and a selective soundtrack. If you can handle the attitude, the cups are worth it.",
-    "placeId": "ChIJoXjzXBpu5kcRxcAyAUf7Oy8",
-    "location": {
-      "lat": 48.864681,
-      "lon": 2.353093,
-      "area": "36 R. de Turbigo, 75003 Paris, France"
-    }
-  },
-  {
-    "slug": "early-june",
-    "name": "Early June",
-    "category": "natural_wine_bar",
-    "status": "PUBLISHED",
-    "shortDescription": "Canal-side natural wine bar with rotating chef residencies; daylight hits different.",
-    "longDescription": "Tiny, clean design, and constantly changing food thanks to guest chefs. Great for a Scandinavian-feeling wine lunch or casual night.",
-    "placeId": "ChIJpRggbu9v5kcRG8MgUOLA89U",
-    "location": {
-      "lat": 48.8729647,
-      "lon": 2.3632777,
-      "area": "19 Rue Jean Poulmarch, 75010 Paris, France"
-    }
+    "photo": "/photos/Stohrer_interior_WenkangShan_Paris_zg86x6.jpeg"
   },
   {
     "slug": "l-avant-comptoir-du-marche",
@@ -541,7 +466,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8517684,
       "lon": 2.3354537,
       "area": "14 Rue Lobineau, 75006 Paris, France"
-    }
+    },
+    "photo": "/photos/lavant-comptoir-du-marche-75006-yves-camdeborde-bar-1280x853.jpg"
   },
   {
     "slug": "la-cremerie",
@@ -555,7 +481,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.871132,
       "lon": 2.361611,
       "area": "41 Rue de Lancry, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/495964019_18308594818233593_3752173337370955256_n.jpg"
   },
   {
     "slug": "o-chateau",
@@ -569,7 +496,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8643,
       "lon": 2.3442,
       "area": "68 Rue Jean-Jacques Rousseau, 75001 Paris, France"
-    }
+    },
+    "photo": "/photos/67e16d128efdc1c8709d8bf9_@desprezmarie.studio-CDV-12-min.jpeg"
   },
   {
     "slug": "freddys",
@@ -583,7 +511,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8540895,
       "lon": 2.3368976,
       "area": "54 Rue de Seine, 75006 Paris, France"
-    }
+    },
+    "photo": "/photos/8.jpg"
   },
   {
     "slug": "caves-saint-gilles",
@@ -597,7 +526,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.85777780000001,
       "lon": 2.3672222,
       "area": "4 Rue Saint-Gilles, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/889414-les-caves-saint-gilles-devanture.jpg"
   },
   {
     "slug": "la-perle",
@@ -611,7 +541,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.859783,
       "lon": 2.3606684,
       "area": "78 Rue Vieille du Temple, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/imagejj.jpg"
   },
   {
     "slug": "shana",
@@ -625,7 +556,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8660715,
       "lon": 2.3487204,
       "area": "14 Rue Saint-Sauveur, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/Shana-Granit.jpeg"
   },
   {
     "slug": "frenchie-bar-a-vins",
@@ -639,7 +571,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8678076,
       "lon": 2.3479027,
       "area": "6 Rue du Nil, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/imagbbe.jpg"
   },
   {
     "slug": "deviant",
@@ -647,7 +580,8 @@ export const restaurants: Restaurant[] = [
     "category": "natural_wine_bar",
     "status": "PUBLISHED",
     "shortDescription": "Standing natty wine bar near Petites Écuries; food blows minds, vibe immaculate.",
-    "longDescription": "No bookings, just roll up. Electric energy, great tunes, and inventive bar food to match the natural wine list."
+    "longDescription": "No bookings, just roll up. Electric energy, great tunes, and inventive bar food to match the natural wine list.",
+    "photo": "/photos/bar-restaurant-deviant-786845.jpg"
   },
   {
     "slug": "vivant-2",
@@ -661,7 +595,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8738226,
       "lon": 2.3497774,
       "area": "43 R. des Petites Écuries, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/vivant-2-restaurant-Paris_theworldkeys_1.jpeg"
   },
   {
     "slug": "terra-bar-a-vins",
@@ -675,21 +610,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8643396,
       "lon": 2.3545759,
       "area": "63 Rue des Gravilliers, 75003 Paris, France"
-    }
-  },
-  {
-    "slug": "chanceux-galande",
-    "name": "Chanceux Galande",
-    "category": "wine_bar",
-    "status": "PUBLISHED",
-    "shortDescription": "Hidden wine bar near Notre-Dame; low-key team and great bottles.",
-    "longDescription": "Tucked on Rue Galande, perfect for a quiet drink away from the crowds. Friendly staff, thoughtful selections.",
-    "placeId": "ChIJZddIWN1x5kcRM7DB8vNDQow",
-    "location": {
-      "lat": 48.8517658,
-      "lon": 2.3467849,
-      "area": "63 Rue Galande, 75005 Paris, France"
-    }
+    },
+    "photo": "/photos/682306-terra-bar-a-vins.jpg"
   },
   {
     "slug": "the-experimental-cocktail-club",
@@ -703,7 +625,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.86606399999999,
       "lon": 2.348261,
       "area": "37 Rue Saint-Sauveur, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/experimentalcocktailclub@mrtripper-11.jpg"
   },
   {
     "slug": "prescription-cocktail-club",
@@ -717,7 +640,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.85500039999999,
       "lon": 2.3379507,
       "area": "23 Rue Mazarine, 75006 Paris, France"
-    }
+    },
+    "photo": "/photos/jdjdjdj.jpg"
   },
   {
     "slug": "le-syndicat",
@@ -731,7 +655,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8718637,
       "lon": 2.3536501,
       "area": "51 Rue du Faubourg Saint-Denis, 75010 Paris, France"
-    }
+    },
+    "photo": "/photos/interieur.jpg"
   },
   {
     "slug": "candelaria",
@@ -745,7 +670,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8629825,
       "lon": 2.3640307,
       "area": "52 Rue de Saintonge, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/candelaria-1.jpg"
   },
   {
     "slug": "le-tres-particulier",
@@ -759,7 +685,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8879064,
       "lon": 2.3353175,
       "area": "Hôtel Particulier Montmartre, 23 Av. Junot Pavillon D, 75018 Paris, France"
-    }
+    },
+    "photo": "/photos/djjdjdj.jpg"
   },
   {
     "slug": "au-top",
@@ -773,7 +700,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8601406,
       "lon": 2.3609193,
       "area": "93 Rue Vieille du Temple, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/587012-au-top-le-restaurant-rooftop-gourmand.jpg"
   },
   {
     "slug": "spootnik-bar",
@@ -787,7 +715,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8642954,
       "lon": 2.354811,
       "area": "57 Rue des Gravilliers, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/isisisi.jpg"
   },
   {
     "slug": "bambino",
@@ -801,7 +730,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8613821,
       "lon": 2.3697899,
       "area": "25 Rue Saint-Sébastien, 75011 Paris, France"
-    }
+    },
+    "photo": "/photos/13_48_40_691_restaurant_bambino_paris.jpg"
   },
   {
     "slug": "bambou",
@@ -815,7 +745,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.8693146,
       "lon": 2.3449991,
       "area": "23 Rue des Jeuneurs, 75002 Paris, France"
-    }
+    },
+    "photo": "/photos/230915_BAMBOU-062.jpg"
   },
   {
     "slug": "les-bains-paris",
@@ -829,7 +760,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.86386539999999,
       "lon": 2.3519431,
       "area": "7 Rue du Bourg l'Abbé, 75003 Paris, France"
-    }
+    },
+    "photo": "/photos/67449950958d582fc48296bb_3.jpeg"
   },
   {
     "slug": "frequence",
@@ -843,7 +775,8 @@ export const restaurants: Restaurant[] = [
       "lat": 48.85481499999999,
       "lon": 2.3759872,
       "area": "20 Rue Keller, 75011 Paris, France"
-    }
+    },
+    "photo": "/photos/hdbwdocbweuoc.jpg"
   }
 ] as const;
 
